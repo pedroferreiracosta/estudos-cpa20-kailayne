@@ -44,14 +44,12 @@
   const toast = msg => { const t = $("#toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove("show"), 2400); };
 
   /* ---------------- Tema ---------------- */
-  const applyTheme = () => {
-    if (S.theme) document.documentElement.setAttribute("data-theme", S.theme);
-    else document.documentElement.removeAttribute("data-theme");
-  };
+  // padrão: modo claro rosé; o modo noite é opcional
+  const applyTheme = () => document.documentElement.setAttribute("data-theme", S.theme === "dark" ? "dark" : "light");
   applyTheme();
   $("#themeToggle").addEventListener("click", () => {
-    const isDark = S.theme ? S.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
-    S.theme = isDark ? "light" : "dark"; save(); applyTheme();
+    S.theme = S.theme === "dark" ? "light" : "dark"; save(); applyTheme();
+    toast(S.theme === "dark" ? "Modo noite ativado 🌙" : "Modo claro ativado 🌸");
   });
 
   /* ---------------- Navegação ---------------- */
@@ -105,6 +103,8 @@
     "Revisar o caderno de erros rende mais que ler conteúdo novo.",
     "Disciplina é lembrar o que você quer de verdade.",
     "Antes de indicar produto, entenda o cliente. Na prova e na vida."
+    , "Você é mais capaz do que imagina. Um passo de cada vez, com leveza."
+    , "Cada flashcard virado é uma sementinha de aprovação. 🌱"
   ];
   function missionFor(dateISO) {
     for (let wi = 0; wi < CRONO.semanas.length; wi++) {
@@ -140,12 +140,12 @@
     <section class="hero fade">
       <div class="hero-grid">
         <div>
-          <span class="eyebrow" style="color:#E2B65C">C-Pro R · antiga CPA-20 · ANBIMA</span>
-          <h1>Oi, Kailayne! Bora rumo à <em>aprovação</em>.</h1>
+          <span class="eyebrow">✿ C-Pro R · antiga CPA-20 · ANBIMA</span>
+          <h1>Oi, Kailayne! ✨<br>Bora rumo à <em>aprovação</em>.</h1>
           <p>Seu plano de 5 semanas com resumos, ${Q.length} questões autorais (cases, árvores de decisão e cálculos), ${FLASH.length} flashcards e simulados no formato oficial: 45 questões em 2h30.</p>
           <div class="row" style="margin-top:18px">
             <a class="btn gold" href="${m ? (m.w.dias[m.di][0][1] || "#/cronograma") : "#/novo/completo"}">Começar a missão de hoje →</a>
-            <a class="btn ghost" style="color:#fff;border-color:rgba(255,255,255,.25)" href="#/novo/completo">Simulado completo</a>
+            <a class="btn ghost" href="#/novo/completo">Simulado completo</a>
           </div>
         </div>
         <div>
@@ -210,7 +210,7 @@
     main.querySelectorAll("[data-task]").forEach(cb => cb.addEventListener("change", () => {
       S.tasks[cb.dataset.task] = cb.checked; save();
       cb.closest(".task").classList.toggle("done", cb.checked);
-      if (cb.checked) toast("Boa, Kailayne! Mais uma ✔︎");
+      if (cb.checked) toast("Arrasou, Kailayne! Mais uma 💖");
       if (location.hash.startsWith("#/cronograma")) route();
     }));
   }
@@ -294,7 +294,7 @@
     main.querySelectorAll(".article table").forEach(tb => {
       if (!tb.parentElement.classList.contains("table-wrap")) { const w = document.createElement("div"); w.className = "table-wrap"; tb.replaceWith(w); w.appendChild(tb); }
     });
-    $("#markTopic").onclick = () => { S.topics[id] = !S.topics[id]; save(); route(); if (S.topics[id]) toast("Tópico concluído! 🎉"); };
+    $("#markTopic").onclick = () => { S.topics[id] = !S.topics[id]; save(); route(); if (S.topics[id]) toast("Tópico concluído, linda! 🌸"); };
     window.scrollTo(0, 0);
   }
 
@@ -520,7 +520,7 @@
     <div class="grid g2">
       <div class="card result-hero fade">
         ${ring(p, ok)}
-        <span class="verdict ${ok ? "ok" : "bad"}">${ok ? "Aprovada! 🎉" : "Ainda não. Bora revisar 💪"}</span>
+        <span class="verdict ${ok ? "ok" : "bad"}">${ok ? "Aprovada! 🎉💖" : "Quase lá! Bora revisar 🌷"}</span>
         <h2 style="margin:6px 0">${r.acertos} de ${r.total} acertos</h2>
         <p class="muted">${nome} · ${new Date(r.data).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" })} · tempo ${fmtTime(r.tempo)}</p>
         <p class="muted" style="font-size:.85rem">${r.modo === "completo" ? "Na prova real o mínimo é 32 de 45." : "Referência: 71% (o equivalente a 32 de 45)."}</p>
