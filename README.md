@@ -2,8 +2,7 @@
 
 Plataforma de estudos completa para a certificação **CPA-20 da ANBIMA**, que desde 2026 se chama **C-Pro R**. Foi feita para a **Kailayne** passar na prova. ♥
 
-> **Acesse:** https://pedroferreiracosta.github.io/estudos-cpa20-kailayne/
-> Funciona no computador e no celular. O progresso fica salvo no próprio navegador.
+> **Como abrir:** baixe o repositório e abra o `index.html` no navegador. Funciona no computador e no celular, e o progresso fica salvo no próprio navegador.
 
 ---
 
