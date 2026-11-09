@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Rumo à CPA-20 · Kailayne</title>
+  <meta name="description" content="Plataforma de estudos para a CPA-20 / C-Pro R da ANBIMA: cronograma, resumos, simulados, cases, árvores de decisão, flashcards e calculadoras.">
+  <meta name="theme-color" content="#0E1726">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230E1726'/%3E%3Cpath d='M18 42 L28 30 L36 37 L47 22' stroke='%23E2B65C' stroke-width='5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='47' cy='22' r='4' fill='%23E2B65C'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" aria-label="Navegação principal">
+      <a class="brand" href="#/inicio">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 64 64"><rect width="64" height="64" rx="16"/><path d="M18 42 L28 30 L36 37 L47 22"/><circle cx="47" cy="22" r="4"/></svg>
+        </span>
+        <span class="brand-text"><strong>Rumo à CPA-20</strong><small>C-Pro R · ANBIMA</small></span>
+      </a>
+      <nav class="nav" id="nav"></nav>
+      <div class="sidebar-foot">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Alternar tema claro/escuro">
+          <span class="ti-light">☀︎ Claro</span><span class="ti-dark">☾ Escuro</span>
+        </button>
+        <p class="love">Feito com carinho para a <b>Kailayne</b> ♥</p>
+      </div>
+    </aside>
+
+    <main class="main" id="main" tabindex="-1"></main>
+
+    <nav class="tabbar" id="tabbar" aria-label="Navegação"></nav>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="data/conteudo.js"></script>
+  <script src="data/cronograma.js"></script>
+  <script src="data/flashcards.js"></script>
+  <script src="data/questoes-b1.js"></script>
+  <script src="data/questoes-b2.js"></script>
+  <script src="data/questoes-b3.js"></script>
+  <script src="data/questoes-b4.js"></script>
+  <script src="assets/js/ferramentas.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
