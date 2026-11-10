@@ -7,6 +7,17 @@ Plataforma de estudos completa para a certificação **CPA-20 da ANBIMA**, que d
 
 ---
 
+## 📱 Instalar como app no celular
+
+O site é um **app instalável** (PWA), com ícone personalizado: um coração com o monograma **K** em letra cursiva. Depois de instalado, abre em tela cheia, como um app de verdade, e funciona até **sem internet**.
+
+<img src="assets/icons/icon-512.png" alt="Ícone do app" width="120">
+
+- **iPhone (Safari):** abra o link → toque em **Compartilhar** (quadrado com seta ↑) → **Adicionar à Tela de Início** → **Adicionar**.
+- **Android (Chrome):** abra o link → toque no menu **⋮** → **Instalar app** (ou **Adicionar à tela inicial**).
+
+O app aparece na tela com o nome **Kai CPA-20**.
+
 ## A prova
 
 | | |
@@ -59,6 +70,9 @@ index.html
 assets/css/style.css      # design system (claro e escuro)
 assets/js/app.js          # roteamento, simulados, flashcards, estatísticas
 assets/js/ferramentas.js  # calculadoras, árvores de decisão, cola
+assets/icons/             # ícone do app (PNG em vários tamanhos + SVG de origem)
+manifest.webmanifest      # configuração do app instalável
+sw.js                     # service worker (funciona offline)
 data/conteudo.js          # resumos dos 4 blocos
 data/cronograma.js        # plano de 5 semanas
 data/flashcards.js        # flashcards

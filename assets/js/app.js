@@ -159,6 +159,7 @@
       </div>
     </section>
 
+    ${installCard()}
     <div class="grid g4" style="margin-top:20px">
       <div class="card stat"><span class="k">Questões resolvidas</span><span class="v">${st.seen}</span><span class="s">${st.uniq} de ${Q.length} diferentes</span></div>
       <div class="card stat"><span class="k">Simulados completos</span><span class="v">${st.sims.length}</span><span class="s">${st.sims.length ? `Melhor nota: ${st.best}/45` : "Meta: 3 na última semana"}</span></div>
@@ -199,6 +200,32 @@
       S.examDate = `${mm[3]}-${mm[2].padStart(2, "0")}-${mm[1].padStart(2, "0")}`; save(); route(); toast("Data da prova salva!");
     };
     bindTasks();
+    bindInstall();
+  }
+
+  /* ---------- Instalar como app ---------- */
+  let deferredPrompt = null;
+  window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); deferredPrompt = e; if (location.hash.startsWith("#/inicio") || !location.hash) route(); });
+  window.addEventListener("appinstalled", () => { S.installHidden = true; save(); toast("App instalado! 💖"); });
+  const isStandalone = () => matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+  function installCard() {
+    if (isStandalone() || S.installHidden) return "";
+    const ua = navigator.userAgent;
+    const ios = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/.test(ua) && "ontouchend" in document);
+    const passos = ios
+      ? `<ol><li>Abra este site no <b>Safari</b></li><li>Toque em <b>Compartilhar</b> (o quadradinho com a seta ↑)</li><li>Escolha <b>“Adicionar à Tela de Início”</b> e toque em <b>Adicionar</b></li></ol>`
+      : deferredPrompt
+        ? `<p class="muted" style="margin:6px 0 10px">Um toque e o ícone aparece junto dos seus apps.</p><button class="btn gold" id="installBtn">Instalar o app</button>`
+        : `<ol><li>Abra este site no <b>Chrome</b> do celular</li><li>Toque no menu <b>⋮</b> (canto superior)</li><li>Escolha <b>“Instalar app”</b> ou <b>“Adicionar à tela inicial”</b></li></ol>`;
+    return `<div class="card install fade"><img src="assets/icons/icon-192.png" alt="Ícone do app Kai CPA-20">
+      <div><span class="eyebrow">✿ Seu app de estudos</span><h3>Coloque na tela de início do celular</h3>${passos}</div>
+      <button class="close" id="installClose" aria-label="Fechar">×</button></div>`;
+  }
+  function bindInstall() {
+    const b = $("#installBtn");
+    if (b) b.onclick = async () => { deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null; route(); };
+    const c = $("#installClose");
+    if (c) c.onclick = () => { S.installHidden = true; save(); route(); toast("Tudo bem! Dá para instalar quando quiser 🌸"); };
   }
 
   /* ---------- Cronograma ---------- */
@@ -728,4 +755,8 @@
 
   window.addEventListener("hashchange", route);
   route();
+
+  if ("serviceWorker" in navigator && location.protocol === "https:") {
+    navigator.serviceWorker.register("sw.js").catch(() => {});
+  }
 })();
